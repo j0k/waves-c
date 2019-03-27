@@ -57,3 +57,4 @@ message("CMAKE_BUILD_TYPE = ${CMAKE_BUILD_TYPE}")
 
 add_subdirectory( src build/src )
 add_subdirectory( test build/test )
+add_subdirectory( tools build/tools )
