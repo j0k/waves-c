@@ -20,14 +20,13 @@ void ARGVParser::parse(const vector<string> argv){
     if (a.find("-") == 0){
       arg   = a.substr(1);
       mod   = "";
-      int    mod_i = a.find("_");
+      int mod_i = a.find("_");
       if (mod_i != string::npos){
         // there are modifiers
         arg = a.substr(1,mod_i-1);
         mod = a.substr(mod_i+1);
       }
       //cout <<arg << " " << an << " m:" << mod << endl;
-
     }
     if (!this->in(arg, this->exe_)){
       i++;
@@ -45,7 +44,18 @@ void ARGVParser::parse(const vector<string> argv){
     }
   }
 
+  this->mod_readfile();
+}
 
+void ARGVParser::mod_readfile(){
+  for(auto & kv: this->opt){
+    if (this->is_mod(kv.first, "f")){
+      string fname = this->opt[kv.first];
+      this->opt[kv.first] = this->readfile(fname);
+
+      cout << fname << this->opt[kv.first];
+    }
+  }
 }
 
 void ARGVParser::parse(int argc, const char * argv[]){
@@ -83,7 +93,9 @@ bool ARGVParser::have(string o){
   return this->in(o, this->opt );
 }
 
-void ARGVParser::_d_print_mapSS(mapSS & m){
+void ARGVParser::_d_print_mapSS(mapSS & m, string name){
+  cout << name << endl;
+  cout << "---------------------" << endl;
   for (auto & kv : m){
     cout << kv.first << ' ' << kv.second <<endl;
   }

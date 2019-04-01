@@ -32,12 +32,14 @@ public:
   void parse(int argc, const char * argv[]);
   void init(mapSS opt_, mapSS mod_, mapSS exe_);
 
+
   bool in(string s, mapSS & m);
   bool is_mod(string o, string mod);
   bool exec(string cmd);
   bool have(string o);
+
+  void mod_readfile();
   string readfile(string & fname);
 
-  void _d_print_mapSS(mapSS & m);
-
+  void _d_print_mapSS(mapSS & m, string name);
 };

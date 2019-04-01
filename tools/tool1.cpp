@@ -112,13 +112,17 @@ bool gen_address(ARGVParser & parser, unsigned char * output){
 	if (parser.exec("a")){
 		 if (parser.have("seed")){
 			 char n = parser.opt["n"].c_str()[0];
-			 waves_seed_to_address(reinterpret_cast<const unsigned char *>(parser.opt["seed"].c_str()),n, output);
+			 auto seed = reinterpret_cast<const unsigned char *>(parser.opt["seed"].c_str());
+			 waves_seed_to_address(seed, n, output);
 			 return true;
 		 }
 	 }
 	 return false;
 }
-void gen_pub(){}
+void gen_pub(){
+	// seed to pubkey 
+}
+
 void gen_priv(){}
 void gen_wallet(){}
 void gen_sign(){}
@@ -140,9 +144,9 @@ int main(int argc, const char * argv[]){
 	ARGVParser parser = initOptParser();
 	parser.parse(argc, argv);
 
-	parser._d_print_mapSS(parser.opt);
-	parser._d_print_mapSS(parser.mod);
-	parser._d_print_mapSS(parser.exe);
+	parser._d_print_mapSS(parser.opt, "opt");
+	parser._d_print_mapSS(parser.mod, "mod");
+	parser._d_print_mapSS(parser.exe, "exe");
 
 	if (gen_address(parser, output))
 		cout << output << endl;
