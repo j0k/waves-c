@@ -57,3 +57,10 @@ usecases:
 [8] decrypt *
 
 ```
+# hand compiling
+
+```
+g++ -c -I./../src/crypto/ *.cpp
+g++ -L../lib/ -lwaves_c -lm -lcrypto *.o ../lib/libwaves_c.a
+./a.out
+```
